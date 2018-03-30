@@ -119,4 +119,4 @@ tests/.coverage
 build/
 tests/report/
 
-datasets/
+data.csv
