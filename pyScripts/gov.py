@@ -2,7 +2,7 @@
 
 import pandas as pd
 
-datapath = "../datasets/healthcare.gov/data.csv"
+datapath = "data.csv"
 datapath2 = "../datasets/prudentialLifeInsurance/train.csv"
 savepath1 = "../datasets/merged.csv"
 
