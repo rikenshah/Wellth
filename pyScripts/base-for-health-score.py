@@ -13,7 +13,7 @@ train_data=data.iloc[:,0:10]
 Y=data.iloc[:,10]
 
 #test_data = pd.read_csv('../datasets/merged.csv')
-features=['Age','BMI','Individual_Rate']
+features=['Ins_Age','BMI','Individual_Rate']
 
 ##Linear Regression
 
