@@ -7,13 +7,14 @@ from sklearn.ensemble import GradientBoostingRegressor
 #from sklearn.preprocessing import LabelEncoder
 
 ## Loading data and preprocessing
-
 data = pd.read_csv('../datasets/merged.csv')
 train_data=data.iloc[:,0:10]
+data["Individual_Rate"] = (data["Individual_Rate"]-data["Individual_Rate"].min())/(data["Individual_Rate"].max()-data["Individual_Rate"].min())
+
 Y=data.iloc[:,10]
 
 #test_data = pd.read_csv('../datasets/merged.csv')
-features=['Age','BMI','Individual_Rate']
+features=['Ins_Age','BMI','Individual_Rate']
 
 ##Linear Regression
 
