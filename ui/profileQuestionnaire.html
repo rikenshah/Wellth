@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  	<style>
+  	.center { 
+  		position: absolute;
+		/*  top: 0;
+ 	 	bottom: 0; */
+  		left: 0;
+  		right: 0;
+  		margin: auto;  
+		}
+	</style>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>User Profile Questionnaire</title>
+  </head>
+  <body> 
+  
+<!-- Start of profile form -->
+<form class="form-horizontal">
+<fieldset>
+<!-- Form Name -->
+<h2>Profile Questionnaire</h2>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="height">Please enter your height in inches.</label>  
+  <div class="col-md-4">
+  <input id="height" name="height" type="text" placeholder="height" class="form-control input-md">
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="weight">Please enter your weight in pounds.</label>  
+  <div class="col-md-4">
+  <input id="weight" name="weight" type="text" placeholder="weight" class="form-control input-md">  
+  </div>
+</div>
+
+<!-- Multiple Checkboxes -->
+<div class="form-group" style="text-align:left">
+  <label class="col-md-4 control-label" for="preexistingConditions">Please select all pre-existing conditions that apply</label>
+  <div class="col-md-4">
+  <div class="checkbox">
+    <label for="preexistingConditions-0">
+      <input type="checkbox" name="preexistingConditions" id="preexistingConditions-0" value="1">
+      High Blood Pressure
+    </label>
+	</div>
+  <div class="checkbox">
+    <label for="preexistingConditions-1">
+      <input type="checkbox" name="preexistingConditions" id="preexistingConditions-1" value="2">
+      High Cholesterol
+    </label>
+	</div>
+  <div class="checkbox">
+    <label for="preexistingConditions-2">
+      <input type="checkbox" name="preexistingConditions" id="preexistingConditions-2" value="3">
+      Heart Disease
+    </label>
+	</div>
+  <div class="checkbox">
+    <label for="preexistingConditions-3">
+      <input type="checkbox" name="preexistingConditions" id="preexistingConditions-3" value="4">
+      Acid Reflux
+    </label>
+	</div>
+  <div class="checkbox">
+    <label for="preexistingConditions-4">
+      <input type="checkbox" name="preexistingConditions" id="preexistingConditions-4" value="5">
+      Obesity
+    </label>
+	</div>
+  <div class="checkbox">
+    <label for="preexistingConditions-5">
+      <input type="checkbox" name="preexistingConditions" id="preexistingConditions-5" value="6">
+      Cancer
+    </label>
+	</div>
+  <div class="checkbox">
+    <label for="preexistingConditions-6">
+      <input type="checkbox" name="preexistingConditions" id="preexistingConditions-6" value="7">
+      COPD
+    </label>
+	</div>
+  <div class="checkbox">
+    <label for="preexistingConditions-7">
+      <input type="checkbox" name="preexistingConditions" id="preexistingConditions-7" value="8">
+      Diabetes
+    </label>
+	</div>
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="selectbasic">Do you have a sedentary job? Sedentary is defined as tending to spend much time seated; somewhat inactive.</label>
+  <div class="col-md-2">
+    <select id="selectbasic" name="selectbasic" class="form-control">
+      <option value="1">Yes</option>
+      <option value="2">No</option>
+    </select>
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="drinkStatus">Do you drink?</label>
+  <div class="col-md-4">
+    <select id="drinkStatus" name="drinkStatus" class="form-control">
+      <option value="1">Yes</option>
+      <option value="2">No</option>
+    </select>
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="smokerStatus">Do you smoke?</label>
+  <div class="col-md-2">
+    <select id="smokerStatus" name="smokerStatus" class="form-control">
+      <option value="1">Yes</option>
+      <option value="2">No</option>
+    </select>
+  </div>
+</div>
+
+<!-- Multiple Radios (inline) -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="exercise">How frequently do you exercise?</label>
+  <div class="col-md-4"> 
+    <label class="radio-inline" for="exercise-0">
+      <input type="radio" name="exercise" id="exercise-0" value="1" checked="checked">
+      Very Infrequently
+    </label> 
+    <label class="radio-inline" for="exercise-1">
+      <input type="radio" name="exercise" id="exercise-1" value="2">
+      Somewhat Infrequently
+    </label> 
+    <label class="radio-inline" for="exercise-2">
+      <input type="radio" name="exercise" id="exercise-2" value="3">
+      Occasionally
+    </label> 
+    <label class="radio-inline" for="exercise-3">
+      <input type="radio" name="exercise" id="exercise-3" value="4">
+      Somewhat Frequently
+    </label> 
+    <label class="radio-inline" for="exercise-4">
+      <input type="radio" name="exercise" id="exercise-4" value="5">
+      Very Frequently
+    </label>
+  </div>
+</div>
+
+<!-- Multiple Checkboxes -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="riskyHobbies">Please select all hobbies that apply</label>
+  <div class="col-md-4">
+  <div class="checkbox">
+    <label for="riskyHobbies-0">
+      <input type="checkbox" name="riskyHobbies" id="riskyHobbies-0" value="1">
+      Bungee Jumping
+    </label>
+	</div>
+  <div class="checkbox">
+    <label for="riskyHobbies-1">
+      <input type="checkbox" name="riskyHobbies" id="riskyHobbies-1" value="2">
+      Scuba Diving
+    </label>
+	</div>
+  <div class="checkbox">
+    <label for="riskyHobbies-2">
+      <input type="checkbox" name="riskyHobbies" id="riskyHobbies-2" value="3">
+      Parachuting
+    </label>
+	</div>
+  <div class="checkbox">
+    <label for="riskyHobbies-3">
+      <input type="checkbox" name="riskyHobbies" id="riskyHobbies-3" value="4">
+      Racing (car, boat, bike)
+    </label>
+	</div>
+  <div class="checkbox">
+    <label for="riskyHobbies-4">
+      <input type="checkbox" name="riskyHobbies" id="riskyHobbies-4" value="5">
+      Hang gliding
+    </label>
+	</div>
+  <div class="checkbox">
+    <label for="riskyHobbies-5">
+      <input type="checkbox" name="riskyHobbies" id="riskyHobbies-5" value="6">
+      Skiing
+    </label>
+	</div>
+  <div class="checkbox">
+    <label for="riskyHobbies-6">
+      <input type="checkbox" name="riskyHobbies" id="riskyHobbies-6" value="7">
+      White water rafting
+    </label>
+	</div>
+  <div class="checkbox">
+    <label for="riskyHobbies-7">
+      <input type="checkbox" name="riskyHobbies" id="riskyHobbies-7" value="8">
+      Hot air ballooning
+    </label>
+	</div>
+  <div class="checkbox">
+    <label for="riskyHobbies-8">
+      <input type="checkbox" name="riskyHobbies" id="riskyHobbies-8" value="9">
+      Heli-skiing or snowboarding
+    </label>
+	</div>
+  <div class="checkbox">
+    <label for="riskyHobbies-9">
+      <input type="checkbox" name="riskyHobbies" id="riskyHobbies-9" value="10">
+      Rock climbing
+    </label>
+	</div>
+  </div>
+</div>
+
+<!-- Multiple Radios (inline) -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="sleepHours">How many hours on average do you sleep?</label>
+  <div class="col-md-4"> 
+    <label class="radio-inline" for="sleepHours-0">
+      <input type="radio" name="sleepHours" id="sleepHours-0" value="3" checked="checked">
+      &lt;3
+    </label> 
+    <label class="radio-inline" for="sleepHours-1">
+      <input type="radio" name="sleepHours" id="sleepHours-1" value="4">
+      4
+    </label> 
+    <label class="radio-inline" for="sleepHours-2">
+      <input type="radio" name="sleepHours" id="sleepHours-2" value="5">
+      5
+    </label> 
+    <label class="radio-inline" for="sleepHours-3">
+      <input type="radio" name="sleepHours" id="sleepHours-3" value="6">
+      6
+    </label> 
+    <label class="radio-inline" for="sleepHours-4">
+      <input type="radio" name="sleepHours" id="sleepHours-4" value="7">
+      7
+    </label> 
+    <label class="radio-inline" for="sleepHours-5">
+      <input type="radio" name="sleepHours" id="sleepHours-5" value="8">
+      8
+    </label> 
+    <label class="radio-inline" for="sleepHours-6">
+      <input type="radio" name="sleepHours" id="sleepHours-6" value="9">
+      &gt;9
+    </label>
+  </div>
+</div>
+</fieldset>
+</form>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
