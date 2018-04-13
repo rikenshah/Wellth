@@ -3,26 +3,38 @@
 <head>
   <meta charset="utf-8">
   <title>{% block title %}Django Simple Login{% endblock %}</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
 </head>
 <body>
-  <header>
-    <h1>Django Simple Login</h1>
-    {% if user.is_authenticated %}
-      Hi {{ user.username }}!
-      <a href="{% url 'logout' %}">logout</a>
-    {% else %}
-      <a href="{% url 'login' %}">login</a>
-      <a href="{% url 'signup' %}">SignUp</a>
-    {% endif %}
-  </header>
-  <hr>
-  <main>
-    {% block content %}
-    {% endblock %}
-  </main>
-  <hr>
-  <footer>
-    This is the footer.
-  </footer>
+    <div class="container container-fluid page-container">
+    <div class="page-header">
+      <h2>Well-thy</h2>
+      {% if user.is_authenticated %}
+      Hi {{ user.username }}!      
+      <a class="btn btn-warning" href="{% url 'health:health_profile' %}">Health Profile</a>
+      <a class="btn btn-success" href="{% url 'health:health_new' %}">Update Profile</a>
+      &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+      <a class="btn btn-danger" href="{% url 'logout' %}">logout</a>
+
+      {% else %}
+      <a class="btn btn-warning" href="{% url 'login' %}">login</a>
+      <a class="btn btn-primary" href="{% url 'signup' %}">SignUp</a>
+      {% endif %}
+    </div>
+      {% block content %}
+      {% endblock %}
+
+      <footer>
+        
+      </footer>
+    </div>
+  </div>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
 </body>
 </html>

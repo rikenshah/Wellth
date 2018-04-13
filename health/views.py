@@ -4,11 +4,34 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView,ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.contrib.auth.models import User
+from .models import HealthProfile
+from django.shortcuts import redirect
 
 # Create your views here.
 
+def profile(request):
+    if(request.user):
+        p = HealthProfile.objects.filter(user=request.user)
+        if len(p)>0 :
+            return render(request,'health/profile.html',{'health_profile' : p[0], 'health_score' : 990})
+        else:
+            return render(request,'health/profile.html',{'health_score' : 990})
+
 class HealthProfileDisplay(ListView):
     model = HealthProfile
+
+def handle_profile(request):
+    h = HealthProfile()
+    if(request.user):
+        p = HealthProfile.objects.filter(user=request.user)
+        if len(p)>0 :
+            print("Profile exists : Reditecting to edit")
+            s = "/health/update/"+str(p[0].id)
+            return redirect(s)
+        else:
+            print("Creating new profile")
+            return redirect("/health/input")
 
 class HealthProfileCreate(CreateView):
     model = HealthProfile

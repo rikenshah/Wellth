@@ -1,32 +1,38 @@
+{% extends 'base.html' %}
+
 {% load widget_tweaks %}
 {% block content %}
 	<h2>Home</h2><a href="{% url 'health:health_profile' %}">Cancel</a>
-	<form method="post" role="form">{% csrf_token %}
-	        <legend>{{ title }}</legend>
-	        {% for field in form %}
-	            {% if field.errors %}
-	                <div class="form-group">
-	                    <label class="control-label">{{ field.label }}</label> 
-	                        <span class="help-inline text-danger">
-	                            {% for error in  field.errors %}<br>{{ error }}{% endfor %}
-	                        </span>
-	                    <div class="controls">
-	                    	{% with placeholder='placeholder:'|add:field.help_text%}
-		                        {{ field | add_class:"form-control"|attr:placeholder}}
-	                    	{% endwith %}
-	                    </div>
-	                </div>
-	            {% else %}
-	                <div class="form-group">
-	                    <label class="control-label">{{ field.label }}</label> 
-                        {% with placeholder='placeholder:'|add:field.help_text%}
-	                        {{ field | add_class:"form-control"|attr:placeholder}}
-                    	{% endwith %}
-	                </div>
-	            {% endif %}
-	        {% endfor %}
-	    <div class="form-actions">
-	        <button type="submit" class="btn btn-primary" >Submit</button>
-	    </div>
-	</form>
+	<div class="row">
+		<div class="col-md-4">
+			<form method="post" role="form">{% csrf_token %}
+			        <legend>{{ title }}</legend>
+			        {% for field in form %}
+			            {% if field.errors %}
+			                <div class="form-group">
+			                    <label class="control-label">{{ field.label }}</label> 
+			                        <span class="help-inline text-danger">
+			                            {% for error in  field.errors %}<br>{{ error }}{% endfor %}
+			                        </span>
+			                    <div class="controls">
+			                    	{% with placeholder='placeholder:'|add:field.help_text%}
+				                        {{ field | add_class:"form-control"|attr:placeholder}}
+			                    	{% endwith %}
+			                    </div>
+			                </div>
+			            {% else %}
+			                <div class="form-group">
+			                    <label class="control-label">{{ field.label }}</label> 
+		                        {% with placeholder='placeholder:'|add:field.help_text%}
+			                        {{ field | add_class:"form-control"|attr:placeholder}}
+		                    	{% endwith %}
+			                </div>
+			            {% endif %}
+			        {% endfor %}
+			    <div class="form-actions">
+			        <button type="submit" class="btn btn-primary" >Submit</button>
+			    </div>
+			</form>
+		</div>
+	</div>
 {% endblock %}

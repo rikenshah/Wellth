@@ -1,7 +1,97 @@
-<h3>Following is your health profile</h3>
-<ul>
-{% for i in healthprofile %}
-	|{{i}}|
-	<li></li>
-{% endfor %}
-</ul>
+
+{% extends 'base.html' %}
+
+{% block content %}
+	<ul>
+	{% if health_profile %}
+	<a class="btn btn-success" href="{% url 'health:handle' %}">Edit Profile</a>
+	<h3>Following is your health profile </h3>
+	<br>
+		<div class="row">
+			<div class="col-md-6">
+				<table class="table table-striped table-bordered">
+				  <thead>
+				    <tr>
+				      <th scope="col">Attribute</th>
+				      <th scope="col">Value</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <tr>
+				      <th scope="row">Age</th>
+				      <td>{{health_profile.age}}</td>
+				    </tr>
+				    <tr>
+				      <th scope="row">Height</th>
+				      <td>{{health_profile.height}}</td>
+				    </tr>
+				    <tr>
+				      <th scope="row">Weight</th>
+				      <td>{{health_profile.weight}}</td>
+				    </tr>
+				    <tr>
+				      <th scope="row">Ailments</th>
+				      <td>{{health_profile.ailments}}</td>
+				    </tr>
+				    <tr>
+				      <th scope="row">Tobacco</th>
+				      <td>{{health_profile.tobacco}}</td>
+				    </tr>
+				    <tr>
+				      <th scope="row">Smoke</th>
+				      <td>{{health_profile.smoke}}</td>
+				    </tr>
+				    <tr>
+				      <th scope="row">Drink</th>
+				      <td>{{health_profile.drink}}</td>
+				    </tr>
+				    <tr>
+				      <th scope="row">Exercise<br></th>
+				      <td>{{health_profile.exercise}}</td>
+				    </tr>
+				    <tr>
+				      <th scope="row">Travel</th>
+				      <td>{{health_profile.travel_time}}</td>
+				    </tr>
+				    <tr>
+				      <th scope="row">Sleep</th>
+				      <td>{{health_profile.sleep_time}}</td>
+				    </tr>
+				    <tr>
+				      <th scope="row">Job Type</th>
+				      <td>{{health_profile.job_type}}</td>
+				    </tr>
+				  </tbody>
+				</table>
+			</div>
+			<div class="col-md-6">
+				<div class="row">
+					<div class="col-md-offset-2 col-md-8">
+						<div class="panel panel-success">
+							<div class="panel-heading">
+								<h3>Health Score</h3> 
+							</div>
+							<div class="panel-body">
+								<h2>{{health_score}}</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12">
+					<center><h3>Recommendations</h3></center>
+					<div class="jumbotron">
+						<p>You should exercise more and sleep more to improve your health score by X points.</p>
+					</div>
+					<div class="jumbotron">
+						<p>You should quit smoking and drinking to improve your score by Y.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	{% else %}
+		<h4>Please create your profile</h4>
+		<a class="btn btn-success" href="{% url 'health:handle' %}">Create Profile</a>
+	{% endif %}
+	</ul>
+
+{% endblock %}
