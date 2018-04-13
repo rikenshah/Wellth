@@ -7,6 +7,9 @@ from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from .models import HealthProfile
 from django.shortcuts import redirect
+from pyScripts import get_health_score
+import json
+from django.core import serializers
 
 # Create your views here.
 
@@ -14,9 +17,11 @@ def profile(request):
     if(request.user):
         p = HealthProfile.objects.filter(user=request.user)
         if len(p)>0 :
+            json_p = json.loads(serializers.serialize('json',[p[0]]))[0]["fields"]
+            get_health_score.preprocessData(json_p)
             return render(request,'health/profile.html',{'health_profile' : p[0], 'health_score' : 990})
         else:
-            return render(request,'health/profile.html',{'health_score' : 990})
+            return render(request,'health/profile.html')
 
 class HealthProfileDisplay(ListView):
     model = HealthProfile

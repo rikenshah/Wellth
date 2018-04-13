@@ -31,8 +31,14 @@ def getCostSavings(healthScore,totalHealthCost):
     savings = (maxHealthScore - healthScore)/maxHealthScore
     return savings*totalHealthCost
 
-def preprocessData():
-    
+def preprocessData(data):
+    data["exercise"] = [data["exercise"],3]
+    data["travel_time"] = [data["travel_time"],3]
+    data["sleep_time"] = [data["sleep_time"],3]
+    data["drink"] = [1 if data["drink"] else 0,1]   
+    data["tobacco"] = [1 if data["tobacco"] else 0,1]
+    data["smoke"] = [1 if data["smoke"] else 0,1]
+    print(data)
 
 if __name__ == "__main__":
     initialize()
