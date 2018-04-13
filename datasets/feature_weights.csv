@@ -1,10 +1,10 @@
-age	0.1
-bmi	0.2
-ailments	0.2
-tobacco	0.1
-smoke	0.1
-drink	0.1
-exercise	0.05
-travel_time	0.05
-sleep_time	0.05
-job_type	0.05
+age	0.1	negative
+bmi	0.2	negative
+ailments	0.2	negative
+tobacco	0.1	negative
+smoke	0.1	negative
+drink	0.1	negative
+exercise	0.05	positive
+travel_time	0.05	negative
+sleep_time	0.05	positive
+job_type	0.05	negative
