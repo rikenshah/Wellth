@@ -22,7 +22,7 @@ LinReg_model = LinearRegression()
 LinReg_model.fit(train_data[features], Y)
 linReg_score = cross_val_score(LinReg_model, train_data[features], Y, cv=10,scoring='r2').mean()
 print("R2 score using Linear Regression is ",linReg_score*100)
-
+print("Linear reg coef",LinReg_model.coef_)
 ##Random Forest Regressor
 ##
 ##RanForest_model = RandomForestRegressor( random_state=0)
