@@ -1,4 +1,6 @@
 import csv
+import json
+import re
 
 maxHealthScore = 1000
 featureWeights_dict={}
@@ -15,7 +17,7 @@ def initialize():
 
 def getHealthScore(input_dict):
     healthScore = 0
-    for key in input_dict:
+    for key in featureWeights_dict:
         weight = float(featureWeights_dict[key][0])
         value = maxHealthScore
         if featureWeights_dict[key][1]=='negative' :
@@ -25,37 +27,56 @@ def getHealthScore(input_dict):
         value = value * weight
         input_dict[key] = value  #optional
         healthScore = healthScore + value
-    return healthScore
+    savings = getCostSavings(healthScore,input_dict["totalHealthCost"])
+    return healthScore,savings
     
 def getCostSavings(healthScore,totalHealthCost):
     savings = (maxHealthScore - healthScore)/maxHealthScore
     return savings*totalHealthCost
 
 def preprocessData(data):
+    print("in preprocess",data)
     data["exercise"] = [data["exercise"],3]
     data["travel_time"] = [data["travel_time"],3]
     data["sleep_time"] = [data["sleep_time"],3]
-    data["drink"] = [1 if data["drink"] else 0,1]   
-    data["tobacco"] = [1 if data["tobacco"] else 0,1]
-    data["smoke"] = [1 if data["smoke"] else 0,1]
-    print(data)
+    data["drink"] = [1 if data["drink"] else 0,2]   
+    data["tobacco"] = [1 if data["tobacco"] else 0,2]
+    data["smoke"] = [1 if data["smoke"] else 0,2]
+
+    """Bag of words to identify past ailments and dangerous job types"""
+
+    ailments=set(['heart','brain','kidney','liver','breating','asthema'])
+    job_type=set(['army','defence','factory'])
+    #pattern = re.compile("\s+|^\s+|\s*,*\s*|\s+$")
+    pattern = re.compile("\s+,*\s*")
+    current_ailments = set([ x for x in pattern.split(data["ailments"]) if x])
+    current_jobtype = set([ x for x in pattern.split(data["job_type"]) if x])
+    data["ailments"] = [1 if current_ailments.intersection(ailments) else 0,2]
+    data["job_type"] = [1 if current_jobtype.intersection(job_type) else 0,2]
+
+    """Identifying Healthy BMI & Age range"""
+    
+    data["age"]=[0 if data["age"]>18 and data["age"]<45 else 1,2]
+    data["bmi"]=data["weight"]/(data["height"]*data["height"])
+    data["bmi"]=[0 if data["bmi"]>18.5 and data["bmi"]<24.9 else 1,2]
+    print("preprocess",data)
+    return getHealthScore(data)
 
 if __name__ == "__main__":
     initialize()
     input_dict = {}
-    input_dict['age']=[1,3] #1 means out of healthy age range
-    input_dict['bmi']=[2,3] #1 means out of healthy BMI range
-    input_dict['ailments']=[0,3] #0 means no ailments 
-    input_dict['tobacco']=[1,2] #binary
-    input_dict['smoke']=[1,2]
-    input_dict['drink']=[1,2]
-    input_dict['exercise']=[2,3] #more exercise
-    input_dict['travel_time']=[1 ,3]
-    input_dict['sleep_time']=[2,3]
-    input_dict['job_type']=[1,3] #moderate risky job
-    preprocessData()
-    healthScore = getHealthScore(input_dict)
-    totalHealthCost = 500
-    savings = getCostSavings(healthScore,totalHealthCost)
-    print("Health Score is ",healthScore)
-    print("Savings is ",savings)
+    input_dict['age']=45 #1 means out of healthy age range
+    input_dict['height']=130.0 #1 means out of healthy BMI range
+    input_dict['weight']=100.0
+    input_dict['ailments']="heart ailments" #0 means no ailments 
+    input_dict['tobacco']=False #binary
+    input_dict['smoke']=True
+    input_dict['drink']= True
+    input_dict['exercise']=1 #more exercise
+    input_dict['travel_time']=1
+    input_dict['sleep_time']=1
+    input_dict['totalHealthCost']=500
+    input_dict['job_type']="" #moderate risky job
+    result = preprocessData(input_dict)
+    print("Health Score is ",result[0])
+    print("Savings is ",result[1])
