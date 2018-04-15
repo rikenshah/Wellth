@@ -58,6 +58,7 @@ def preprocessData(data):
     
     data["age"]=[0 if data["age"]>18 and data["age"]<45 else 1,2]
     data["bmi"]=data["weight"]/(data["height"]*data["height"])
+    print ("bmi: ", data["bmi"])
     data["bmi"]=[0 if data["bmi"]>18.5 and data["bmi"]<24.9 else 1,2]
     print("preprocess",data)
     return getHealthScore(data)
@@ -66,15 +67,15 @@ if __name__ == "__main__":
     initialize()
     input_dict = {}
     input_dict['age']=45 #1 means out of healthy age range
-    input_dict['height']=130.0 #1 means out of healthy BMI range
-    input_dict['weight']=100.0
+    input_dict['height']= 1.8 #1 means out of healthy BMI range
+    input_dict['weight']=80
     input_dict['ailments']="heart ailments" #0 means no ailments 
-    input_dict['tobacco']=False #binary
-    input_dict['smoke']=True
-    input_dict['drink']= True
-    input_dict['exercise']=1 #more exercise
-    input_dict['travel_time']=1
-    input_dict['sleep_time']=1
+    input_dict['tobacco']=True #binary
+    input_dict['smoke']= False
+    input_dict['drink']= False
+    input_dict['exercise']=2 #more exercise
+    input_dict['travel_time']=2
+    input_dict['sleep_time']=2
     input_dict['totalHealthCost']=500
     input_dict['job_type']="" #moderate risky job
     result = preprocessData(input_dict)
