@@ -18,8 +18,9 @@ def profile(request):
         p = HealthProfile.objects.filter(user=request.user)
         if len(p)>0 :
             json_p = json.loads(serializers.serialize('json',[p[0]]))[0]["fields"]
-            get_health_score.preprocessData(json_p)
-            return render(request,'health/profile.html',{'health_profile' : p[0], 'health_score' : 990})
+            # json_p["healthcare_costs"] = 100
+            result = get_health_score.preprocessData(json_p)
+            return render(request,'health/profile.html',{'health_profile' : p[0], 'health_score' : result[0], 'savings' : result[1]})
         else:
             return render(request,'health/profile.html')
 
@@ -40,7 +41,7 @@ def handle_profile(request):
 
 class HealthProfileCreate(CreateView):
     model = HealthProfile
-    fields = ['age','height','weight','ailments','tobacco','smoke','drink','exercise','travel_time', 'sleep_time','job_type']
+    fields = ['age','height','weight','ailments','healthcare_costs','tobacco','smoke','drink','exercise','travel_time', 'sleep_time','job_type']
     success_url = reverse_lazy('health:health_profile')
 
     def form_valid(self, form):
@@ -49,5 +50,5 @@ class HealthProfileCreate(CreateView):
 
 class HealthProfileUpdate(UpdateView):
     model = HealthProfile
-    fields = ['age','height','weight','ailments','tobacco','smoke','drink','exercise','travel_time', 'sleep_time','job_type']
+    fields = ['age','height','weight','ailments','healthcare_costs','tobacco','smoke','drink','exercise','travel_time', 'sleep_time','job_type']
     success_url = reverse_lazy('health:health_profile')

@@ -15,8 +15,9 @@
       <h2>Well-thy</h2>
       {% if user.is_authenticated %}
       Hi {{ user.username }}!      
+      <a class="btn btn-warning" href="{% url 'home' %}">Home</a>
       <a class="btn btn-warning" href="{% url 'health:health_profile' %}">Health Profile</a>
-      <a class="btn btn-success" href="{% url 'health:health_new' %}">Update Profile</a>
+      <a class="btn btn-success" href="{% url 'health:handle' %}">Update Profile</a>
       &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
       <a class="btn btn-danger" href="{% url 'logout' %}">logout</a>
 

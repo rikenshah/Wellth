@@ -1,12 +1,13 @@
 import csv
 import json
 import re
+import os
 
 maxHealthScore = 1000
 featureWeights_dict={}
 
 def initialize():
-    reader = csv.reader(open('../datasets/feature_weights.csv'))
+    reader = csv.reader(open('pyScripts/feature_weights.csv'))
     for row in reader:
         value=[]
         split_row= row[0].split('\t')
@@ -27,15 +28,16 @@ def getHealthScore(input_dict):
         value = value * weight
         input_dict[key] = value  #optional
         healthScore = healthScore + value
-    savings = getCostSavings(healthScore,input_dict["totalHealthCost"])
-    return healthScore,savings
+    savings = getCostSavings(healthScore,input_dict["healthcare_costs"])
+    return round(healthScore,2),round(savings,2)
     
-def getCostSavings(healthScore,totalHealthCost):
+def getCostSavings(healthScore,healthcare_costs):
     savings = (maxHealthScore - healthScore)/maxHealthScore
-    return savings*totalHealthCost
+    return savings*healthcare_costs
 
 def preprocessData(data):
-    print("in preprocess",data)
+    # print("in preprocess",data)
+    initialize()
     data["exercise"] = [data["exercise"],3]
     data["travel_time"] = [data["travel_time"],3]
     data["sleep_time"] = [data["sleep_time"],3]
@@ -75,7 +77,7 @@ if __name__ == "__main__":
     input_dict['exercise']=1 #more exercise
     input_dict['travel_time']=1
     input_dict['sleep_time']=1
-    input_dict['totalHealthCost']=500
+    input_dict['healthcare_costs']=500
     input_dict['job_type']="" #moderate risky job
     result = preprocessData(input_dict)
     print("Health Score is ",result[0])

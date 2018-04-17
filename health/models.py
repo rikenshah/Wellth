@@ -5,12 +5,13 @@ from django.contrib.auth.models import User
 class HealthProfile(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	age = models.IntegerField(validators=[MaxValueValidator(100), MinValueValidator(0)],null=True,blank=True,help_text="Enter age :")
-	height = models.FloatField(validators=[MaxValueValidator(300), MinValueValidator(20)],null=True,blank=True,help_text="Enter height (In Centimeter) :")
+	height = models.FloatField(validators=[MaxValueValidator(300), MinValueValidator(20)],null=True,blank=True,help_text="Enter height (In Inches) :")
 	weight = models.FloatField(validators=[MaxValueValidator(300), MinValueValidator(20)],null=True,blank=True,help_text="Enter weight (In Lbs) :")
 	ailments = models.TextField(max_length=1000, null=True, blank=True, help_text='Enter comma separated list of pre-existing ailments :')
 	tobacco = models.BooleanField(help_text="Do you consume tobacco?", default=False)
 	smoke = models.BooleanField(help_text="Do you consume smoke?", default=False)
 	drink = models.BooleanField(help_text="Do you consume drink?", default=False)
+	healthcare_costs = models.FloatField(validators=[MaxValueValidator(50000), MinValueValidator(0)],null=True,blank=True,help_text="Enter your total healthcare costs")
 	POSS_EXERCISE = (
 	    (2, '>15 hours/week'),
 	    (1, '6-15 hours/week'),
