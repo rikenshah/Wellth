@@ -34,7 +34,7 @@ def getCostSavings(healthScore,totalHealthCost):
     savings = (maxHealthScore - healthScore)/maxHealthScore
     return savings*totalHealthCost
 
-def preprocessData(data):
+def preprocessData(data, featureWeights_dict, maxHealthScore):
     print("in preprocess",data)
     data["exercise"] = [data["exercise"],3]
     data["travel_time"] = [data["travel_time"],3]
