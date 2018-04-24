@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from .models import HealthProfile
 from django.shortcuts import redirect
 from pyScripts import get_health_score
+from pyScripts import get_recommendations
 import json
 from django.core import serializers
 
@@ -20,7 +21,8 @@ def profile(request):
             json_p = json.loads(serializers.serialize('json',[p[0]]))[0]["fields"]
             # json_p["healthcare_costs"] = 100
             result = get_health_score.preprocessData(json_p)
-            return render(request,'health/profile.html',{'health_profile' : p[0], 'health_score' : result[0], 'savings' : result[1]})
+            recommendations = get_recommendations.processRecommendations(json_p, 1000)
+            return render(request,'health/profile.html',{'health_profile' : p[0], 'health_score' : result[0], 'savings' : result[1], 'recommendations' : recommendations})
         else:
             return render(request,'health/profile.html')
 
