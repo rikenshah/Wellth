@@ -44,7 +44,6 @@ def preprocessData(data):
     # data["drink"] = [1 if data["drink"] else 0,2]   
     # data["tobacco"] = [1 if data["tobacco"] else 0,2]
     # data["smoke"] = [1 if data["smoke"] else 0,2]
-
     # """Bag of words to identify past ailments and dangerous job types"""
 
     # ailments=set(['heart','brain','kidney','liver','breating','asthema'])
@@ -57,8 +56,7 @@ def preprocessData(data):
     # data["job_type"] = [1 if current_jobtype.intersection(job_type) else 0,2]
 
     # """Identifying Healthy BMI & Age range"""
-    
-    # data["age"]=[0 if data["age"]>18 and data["age"]<45 else 1,2]
+        # data["age"]=[0 if data["age"]>18 and data["age"]<45 else 1,2]
     # data["bmi"]=data["weight"]/(data["height"]*data["height"])
     # data["bmi"]=[0 if data["bmi"]>18.5 and data["bmi"]<24.9 else 1,2]
     # print("preprocess",data)
@@ -68,8 +66,8 @@ if __name__ == "__main__":
     initialize()
     input_dict = {}
     input_dict['age']=45 #1 means out of healthy age range
-    input_dict['height']=130.0 #1 means out of healthy BMI range
-    input_dict['weight']=100.0
+    input_dict['height']= 1.8 #1 means out of healthy BMI range
+    input_dict['weight']=80
     input_dict['ailments']="heart ailments" #0 means no ailments 
     input_dict['tobacco']=False #binary
     input_dict['smoke']=True

@@ -117,8 +117,6 @@ def getNegativeRecommendation(data, weight, maxHealthScore):
     
 #Calculates improvement for a key that has a positive relationship
 def getPositiveRecommendation(data, weight, maxHealthScore):
-    # print("data")
-    # print(data)
     if data[0] == 0:
         return getPointsForImprovement(data[1], weight, maxHealthScore)
         
@@ -140,6 +138,7 @@ def processRecommendations(data, maxHealthScore):
     featureWeights["travel_time"], maxHealthScore)
     recs["sleep_time"] = getSleepRec(data["sleep_time"][0], featureWeights["sleep_time"], maxHealthScore )
     '''
+
     print("processRecommendations")
     data = preprocessData(data)
     print(data)
@@ -181,4 +180,3 @@ if __name__ == "__main__":
     'sleep_time': ['0.05', 'positive'], 'job_type': ['0.05', 'negative']}
     
     print(processRecommendations(data, 1000))
-    
