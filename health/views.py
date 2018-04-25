@@ -19,9 +19,12 @@ def profile(request):
         p = HealthProfile.objects.filter(user=request.user)
         if len(p)>0 :
             json_p = json.loads(serializers.serialize('json',[p[0]]))[0]["fields"]
+            print("json p")
+            print(json_p)
             # json_p["healthcare_costs"] = 100
-            result = get_health_score.preprocessData(json_p)
             recommendations = get_recommendations.processRecommendations(json_p, 1000)
+            result = get_health_score.preprocessData(json_p)
+            # recommendations = "hello"
             return render(request,'health/profile.html',{'health_profile' : p[0], 'health_score' : result[0], 'savings' : result[1], 'recommendations' : recommendations})
         else:
             return render(request,'health/profile.html')

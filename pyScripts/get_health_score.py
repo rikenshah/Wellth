@@ -38,30 +38,30 @@ def getCostSavings(healthScore,healthcare_costs):
 def preprocessData(data):
     # print("in preprocess",data)
     initialize()
-    data["exercise"] = [data["exercise"],3]
-    data["travel_time"] = [data["travel_time"],3]
-    data["sleep_time"] = [data["sleep_time"],3]
-    data["drink"] = [1 if data["drink"] else 0,2]   
-    data["tobacco"] = [1 if data["tobacco"] else 0,2]
-    data["smoke"] = [1 if data["smoke"] else 0,2]
+    # data["exercise"] = [data["exercise"],3]
+    # data["travel_time"] = [data["travel_time"],3]
+    # data["sleep_time"] = [data["sleep_time"],3]
+    # data["drink"] = [1 if data["drink"] else 0,2]   
+    # data["tobacco"] = [1 if data["tobacco"] else 0,2]
+    # data["smoke"] = [1 if data["smoke"] else 0,2]
 
-    """Bag of words to identify past ailments and dangerous job types"""
+    # """Bag of words to identify past ailments and dangerous job types"""
 
-    ailments=set(['heart','brain','kidney','liver','breating','asthema'])
-    job_type=set(['army','defence','factory'])
-    #pattern = re.compile("\s+|^\s+|\s*,*\s*|\s+$")
-    pattern = re.compile("\s+,*\s*")
-    current_ailments = set([ x for x in pattern.split(data["ailments"]) if x])
-    current_jobtype = set([ x for x in pattern.split(data["job_type"]) if x])
-    data["ailments"] = [1 if current_ailments.intersection(ailments) else 0,2]
-    data["job_type"] = [1 if current_jobtype.intersection(job_type) else 0,2]
+    # ailments=set(['heart','brain','kidney','liver','breating','asthema'])
+    # job_type=set(['army','defence','factory'])
+    # #pattern = re.compile("\s+|^\s+|\s*,*\s*|\s+$")
+    # pattern = re.compile("\s+,*\s*")
+    # current_ailments = set([ x for x in pattern.split(data["ailments"]) if x])
+    # current_jobtype = set([ x for x in pattern.split(data["job_type"]) if x])
+    # data["ailments"] = [1 if current_ailments.intersection(ailments) else 0,2]
+    # data["job_type"] = [1 if current_jobtype.intersection(job_type) else 0,2]
 
-    """Identifying Healthy BMI & Age range"""
+    # """Identifying Healthy BMI & Age range"""
     
-    data["age"]=[0 if data["age"]>18 and data["age"]<45 else 1,2]
-    data["bmi"]=data["weight"]/(data["height"]*data["height"])
-    data["bmi"]=[0 if data["bmi"]>18.5 and data["bmi"]<24.9 else 1,2]
-    print("preprocess",data)
+    # data["age"]=[0 if data["age"]>18 and data["age"]<45 else 1,2]
+    # data["bmi"]=data["weight"]/(data["height"]*data["height"])
+    # data["bmi"]=[0 if data["bmi"]>18.5 and data["bmi"]<24.9 else 1,2]
+    # print("preprocess",data)
     return getHealthScore(data)
 
 if __name__ == "__main__":

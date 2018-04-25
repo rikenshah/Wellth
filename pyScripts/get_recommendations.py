@@ -3,7 +3,7 @@
   bmi, smoking, tobacco usage, alcohol consumption, exercise
   travel time, sleep time, job type.
 '''
-import csv
+import csv, re
 
 featureWeights_dict={}
 
@@ -15,6 +15,35 @@ moderate_sleep = 1
 no_exercise = 0
 moderate_exercise = 1
 optimal_exercise = 2
+
+def preprocessData(data):
+    # print("Recoomendation preprocess")
+    # print(data)
+    data["exercise"] = [data["exercise"],3]
+    data["travel_time"] = [data["travel_time"],3]
+    data["sleep_time"] = [data["sleep_time"],3]
+    data["drink"] = [1 if data["drink"] else 0,2]   
+    data["tobacco"] = [1 if data["tobacco"] else 0,2]
+    data["smoke"] = [1 if data["smoke"] else 0,2]
+
+    """Bag of words to identify past ailments and dangerous job types"""
+
+    ailments=set(['heart','brain','kidney','liver','breating','asthema'])
+    job_type=set(['army','defence','factory'])
+    #pattern = re.compile("\s+|^\s+|\s*,*\s*|\s+$")
+    pattern = re.compile("\s+,*\s*")
+    current_ailments = set([ x for x in pattern.split(data["ailments"]) if x])
+    current_jobtype = set([ x for x in pattern.split(data["job_type"]) if x])
+    data["ailments"] = [1 if current_ailments.intersection(ailments) else 0,2]
+    data["job_type"] = [1 if current_jobtype.intersection(job_type) else 0,2]
+
+    """Identifying Healthy BMI & Age range"""
+    
+    data["age"]=[0 if data["age"]>18 and data["age"]<45 else 1,2]
+    data["bmi"]=data["weight"]/(data["height"]*data["height"])
+    data["bmi"]=[0 if data["bmi"]>18.5 and data["bmi"]<24.9 else 1,2]
+    # print("preprocess",data)
+    return data
 
 def initialize_feature_weights():
     reader = csv.reader(open('pyScripts/feature_weights.csv'))
@@ -88,6 +117,8 @@ def getNegativeRecommendation(data, weight, maxHealthScore):
     
 #Calculates improvement for a key that has a positive relationship
 def getPositiveRecommendation(data, weight, maxHealthScore):
+    # print("data")
+    # print(data)
     if data[0] == 0:
         return getPointsForImprovement(data[1], weight, maxHealthScore)
         
@@ -109,11 +140,15 @@ def processRecommendations(data, maxHealthScore):
     featureWeights["travel_time"], maxHealthScore)
     recs["sleep_time"] = getSleepRec(data["sleep_time"][0], featureWeights["sleep_time"], maxHealthScore )
     '''
+    print("processRecommendations")
+    data = preprocessData(data)
+    print(data)
+    print("end")
     featureWeights = initialize_feature_weights()
     points = 0.0
     resultStrings = []
-    recStrDic = initializeStrDic()
-    for key in data.keys():
+    recStrDic = initializeStrDic()    
+    for key in ["exercise","travel_time","sleep_time","drink","tobacco","smoke","bmi"]:
         result = getRecommendationPointsForKey(data[key], featureWeights[key], maxHealthScore)
         if result is not None:
             points += result
