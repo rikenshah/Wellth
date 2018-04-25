@@ -22,10 +22,10 @@ def profile(request):
             print("json p")
             print(json_p)
             # json_p["healthcare_costs"] = 100
-            recommendations = get_recommendations.processRecommendations(json_p, 1000)
+            recommendations,savings = get_recommendations.processRecommendations(json_p, 1000)
             result = get_health_score.preprocessData(json_p)
             # recommendations = "hello"
-            return render(request,'health/profile.html',{'health_profile' : p[0], 'health_score' : result[0], 'savings' : result[1], 'recommendations' : recommendations})
+            return render(request,'health/profile.html',{'health_profile' : p[0], 'health_score' : result, 'savings' : savings, 'recommendations' : recommendations})
         else:
             return render(request,'health/profile.html')
 

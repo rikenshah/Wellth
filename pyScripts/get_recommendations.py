@@ -40,7 +40,7 @@ def preprocessData(data):
     """Identifying Healthy BMI & Age range"""
     
     data["age"]=[0 if data["age"]>18 and data["age"]<45 else 1,2]
-    data["bmi"]=data["weight"]/(data["height"]*data["height"])
+    data["bmi"]=data["weight"]/(data["height"]*data["height"])*703
     data["bmi"]=[0 if data["bmi"]>18.5 and data["bmi"]<24.9 else 1,2]
     # print("preprocess",data)
     return data
@@ -57,8 +57,8 @@ def initialize_feature_weights():
     return featureWeights_dict
 
 #Calculates the number of points healthscore will improve, rounded to 2 decimals
-def getPointsForImprovement(levels, weight, maxHealthScore):
-    return (round((float(weight) * maxHealthScore / levels) , 2))
+def getPointsForImprovement(current,levels, weight, maxHealthScore):
+    return (round((float(weight) * maxHealthScore * (current/levels)) , 2))
     
 def getBmiRec(bmi_data):
     if bmi_number != healthy_bmi:
@@ -71,6 +71,7 @@ def getDrinkRec(drinks):
         return ("If you stop drinking alcohol your healthscore will improve by "
     " 50 points.")
     return None
+
 def getExerciseRec(exercise):
     if exercise == no_exercise:
         return ("If start exercising 6 hours a week your healthscore will improve "
@@ -79,14 +80,17 @@ def getExerciseRec(exercise):
         return ("If you exercise more than 15 hours a week "
         " your healthscore will improve 17 points.")
     return None
+
 def getSmokeRec(smokes):
     if smokes:
         return ("If you quit smoking your healthscore will improve 50 points.")
     return None
+
 def getTobaccoRec(uses_tobacco):
     if uses_tobacco:
         return ("If you stop using tobacco your healthscore will improve 50 points.")
     return None
+
 def getTravelRec(travel_time):
     if travel_time == excess_travel:
         return ("If you reduce your travel_time to under 10 hours "
@@ -95,6 +99,7 @@ def getTravelRec(travel_time):
         return ("If you reduce your travel_time to under 5 hours "
         "your healthscore will improve 17 points.")
     return None
+
 def getSleepRec(sleep):
     if sleep == low_sleep:
         return ("If you increase sleep to more than 6 hours a day "
@@ -113,18 +118,22 @@ def getRecommendationPointsForKey(data, featureWeight, maxHealthScore):
 def getNegativeRecommendation(data, weight, maxHealthScore):
     if data[0] == 0:
         return None
-    return getPointsForImprovement(data[1], weight, maxHealthScore)
+    return getPointsForImprovement(data[0],data[1], weight, maxHealthScore)
     
 #Calculates improvement for a key that has a positive relationship
 def getPositiveRecommendation(data, weight, maxHealthScore):
-    if data[0] == 0:
-        return getPointsForImprovement(data[1], weight, maxHealthScore)
-        
+    if data[0] != 2:
+        print("New method")
+        print(type(weight))
+        print(weight)
+        print(data)
+        # return getPointsForImprovement(data[1], weight, maxHealthScore)
+        return float(weight)*((data[1]-data[0]-1)/data[1])*maxHealthScore
+    return None
+
+
 def initializeStrDic():
-    return{"smoke" : ["", "stop smoking"], "exercise" : ["increase your exercise to atleast 6 hours a week", 
-"increase your exercise to atleast 15 hours a week"], "sleep_time": ["increase the amount you sleep to atleast 6 hours a day",
-"increase the amount you sleep to above 8 hours a day"], "bmi": ["", "get your bmi in the healthy range (18.5 - 24 .9)"], 
-"drink": ["", "stop drinking"], "tobacco": ["", "stop using tobacco"]}
+    return{"smoke" : ["", "stop smoking"], "exercise" : ["increase your exercise to atleast 6 hours a week", "increase your exercise to atleast 15 hours a week"], "sleep_time": ["increase the amount you sleep to atleast 6 hours a day","increase the amount you sleep to above 8 hours a day"], "bmi": ["", "get your bmi in the healthy range (18.5 - 24 .9)"],"drink": ["", "stop drinking"], "tobacco": ["", "stop using tobacco"], "travel_time" : ["", "reduce the travel time to less than 5 hours","reduce the travel to less than 10 hours"]}
 
 def processRecommendations(data, maxHealthScore):
     '''
@@ -142,24 +151,36 @@ def processRecommendations(data, maxHealthScore):
     print("processRecommendations")
     data = preprocessData(data)
     print(data)
+    all_recommendations = []
     print("end")
     featureWeights = initialize_feature_weights()
     points = 0.0
     resultStrings = []
     recStrDic = initializeStrDic()    
-    for key in ["exercise","travel_time","sleep_time","drink","tobacco","smoke","bmi"]:
+    print("recStrDict : ",recStrDic)
+    for key in ["exercise","sleep_time","drink","tobacco","smoke","bmi","travel_time"]:
         result = getRecommendationPointsForKey(data[key], featureWeights[key], maxHealthScore)
         if result is not None:
             points += result
+            print("Result is ",result);
             resultStrings.append(recStrDic[key][data[key][0]])
-    return getRecommendationString(resultStrings, points)
+            all_recommendations.append(getRecommendationString([recStrDic[key][data[key][0]]],result))
+
+    all_recommendations.append(getRecommendationString(resultStrings, points))
+
+    # for key in ["exercise","sleep_time","drink","tobacco","smoke","bmi","travel_time"]:
+    #     all_recommendations.append(getRecommendationString([recStrDic[key][data[key][0]]],getRecommendationPointsForKey(data[key], featureWeights[key], maxHealthScore)))
+    all_recommendations = [all_recommendations[-1]]+all_recommendations[0:len(all_recommendations)-1]
+    return all_recommendations,round((points/maxHealthScore*data["healthcare_costs"]),2)
     
 def getRecommendationString(resultStrings, points):
   recommendationString = "If you "
   resultStringsLength = len(resultStrings)
-  for index in (range(resultStringsLength - 2)):
+  if resultStringsLength == 0:
+    return ["You are in good shape."]
+  for index in (range(resultStringsLength - 1)):
     recommendationString += (resultStrings[index] + ", ")
-  recommendationString += ("and " + resultStrings[resultStringsLength - 1] + 
+  recommendationString += ("and " + resultStrings[resultStringsLength -1] + 
   " your healthscore will improve by " + str(round(points, 2)) + " points.")
   return recommendationString
   

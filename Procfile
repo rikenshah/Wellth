@@ -1,0 +1,1 @@
+web: gunicorn wellthy.wsgi --log-file -

@@ -4,7 +4,7 @@
 {% block content %}
 	<ul>
 	{% if health_profile %}
-	<a class="btn btn-success" href="{% url 'health:handle' %}">Edit Profile</a>
+	<!-- <a class="btn btn-success" href="{% url 'health:handle' %}">Edit Profile</a> -->
 	<h3>Following is your health profile </h3>
 	<br>
 		<div class="row">
@@ -51,15 +51,33 @@
 				    </tr>
 				    <tr>
 				      <th scope="row">Exercise<br></th>
-				      <td>{{health_profile.exercise}}</td>
+				      {% if health_profile.exercise == 2 %}
+				       	<td>>15 hours/week</td>
+				      {% elif health_profile.exercise == 1 %}
+				       	<td>6-15 hours/week</td>
+				      {% elif health_profile.exercise == 0 %}
+				       	<td><6 hours/week</td>
+					  {% endif %}
 				    </tr>
 				    <tr>
 				      <th scope="row">Travel</th>
-				      <td>{{health_profile.travel_time}}</td>
+				      {% if health_profile.travel_time == 2 %}
+				       	<td>>10 hours/week</td>
+				      {% elif health_profile.travel_time == 1 %}
+				       	<td>5-10 hours/week</td>
+				      {% elif health_profile.travel_time == 0 %}
+				       	<td><5 hours/week</td>
+					  {% endif %}
 				    </tr>
 				    <tr>
 				      <th scope="row">Sleep</th>
-				      <td>{{health_profile.sleep_time}}</td>
+				      {% if health_profile.sleep_time == 2 %}
+				       	<td>>8 hours/day</td>
+				      {% elif health_profile.sleep_time == 1 %}
+				       	<td>6-8 hours/day</td>
+				      {% elif health_profile.sleep_time == 0 %}
+				       	<td><6 hours/day</td>
+					  {% endif %}
 				    </tr>
 				    <tr>
 				      <th scope="row">Job Type</th>
@@ -93,9 +111,11 @@
 				</div>
 				<div class="col-md-12">
 					<center><h3>Recommendations</h3></center>
+					{% for r in recommendations%}
 					<div class="jumbotron">
-						<p>{{recommendations}}</p>
+						<p>{{r}}</p>
 					</div>
+					{% endfor %}
 				</div>
 			</div>
 		</div>

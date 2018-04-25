@@ -28,11 +28,12 @@ def getHealthScore(input_dict):
         value = value * weight
         input_dict[key] = value  #optional
         healthScore = healthScore + value
-    savings = getCostSavings(healthScore,input_dict["healthcare_costs"])
-    return round(healthScore,2),round(savings,2)
+    # savings = getCostSavings(healthScore,input_dict["healthcare_costs"])
+    # return round(healthScore,2),round(savings,2)
+    return round(healthScore,2)
     
-def getCostSavings(healthScore,healthcare_costs):
-    savings = (maxHealthScore - healthScore)/maxHealthScore
+def getCostSavings(improvementPoints,healthcare_costs):
+    savings = (improvementPoints)/maxHealthScore
     return savings*healthcare_costs
 
 def preprocessData(data):
