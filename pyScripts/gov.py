@@ -2,9 +2,9 @@
 
 import pandas as pd
 
-datapath = "data.csv"
+datapath = "../datasets/healthcaregov/data.csv"
 datapath2 = "../datasets/prudentialLifeInsurance/train.csv"
-savepath1 = "../datasets/merged.csv"
+savepath1 = "../datasets/merged1.csv"
 
 df = pd.read_csv(datapath)
 

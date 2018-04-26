@@ -1,0 +1,6 @@
+Business Year,State Code,Issuer ID,Source Name,Version Number,Import Date,Issuer ID (repeated),Tax Identification Number,Rate Effective Date,Rate Expiration Date,Plan ID,Rating Area ID,Tobacco,Age,Individual Rate,Individual Tobacco Rate,Couple,Primary Subscriber and One Dependent,Primary Subscriber and Two Dependents,Primary Subscriber and Three or More Dependents,Couple and One Dependent,Couple and Two Dependents,Couple and Three or More Dependents,Row Number,Eliminate
+2015,FL,27357,HIOS,7,02/13/2015 08:19:00 AM,27357,59-3315064,01/01/2015,03/31/2015,27357FL1850007,Rating Area 5,Tobacco User/Non-Tobacco User,62,1055.28,1477.39,,,,,,,,10176,
+2015,FL,27357,HIOS,7,02/13/2015 08:19:00 AM,27357,59-3315064,07/01/2015,09/30/2015,27357FL1850019,Rating Area 30,Tobacco User/Non-Tobacco User,42,429.43,515.32,,,,,,,,11306,
+2015,FL,27357,HIOS,7,02/13/2015 08:19:00 AM,27357,59-3315064,10/01/2015,12/31/2015,27357FL1870038,Rating Area 64,Tobacco User/Non-Tobacco User,29,298.95,298.95,,,,,,,,17825,
+2015,FL,27357,HIOS,7,02/13/2015 08:19:00 AM,27357,59-3315064,07/01/2015,09/30/2015,27357FL1860010,Rating Area 17,Tobacco User/Non-Tobacco User,34,426.34,468.97,,,,,,,,5640,
+2015,FL,27357,HIOS,7,02/13/2015 08:19:00 AM,27357,59-3315064,07/01/2015,09/30/2015,27357FL1870040,Rating Area 17,Tobacco User/Non-Tobacco User,41,323.26,387.91,,,,,,,,17975,

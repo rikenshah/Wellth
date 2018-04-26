@@ -34,7 +34,7 @@
 				      <td>{{health_profile.ailments}}</td>
 				    </tr>
 				    <tr>
-				      <th scope="row">Health Care Costs</th>
+				      <th scope="row">Health Care Costs (per year)</th>
 				      <td>{{health_profile.healthcare_costs}}</td>
 				    </tr>
 				    <tr>
@@ -91,17 +91,17 @@
 					<div class="col-md-6">
 						<div class="panel panel-success">
 							<div class="panel-heading">
-								<h3>Health Score</h3> 
+								<h3>Health Score <br><small>(out of 1000)</small></h3> 
 							</div>
 							<div class="panel-body">
-								<h2>{{health_score}}/1000</h2>
+								<h2>{{health_score}}</h2>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="panel panel-success">
 							<div class="panel-heading">
-								<h3>Possible Savings</h3> 
+								<h3>Possible Savings <br><small>(per year)</small></h3> 
 							</div>
 							<div class="panel-body">
 								<h2>${{savings}}</h2>

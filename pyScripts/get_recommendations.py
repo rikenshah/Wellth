@@ -133,7 +133,7 @@ def getPositiveRecommendation(data, weight, maxHealthScore):
 
 
 def initializeStrDic():
-    return{"smoke" : ["", "stop smoking"], "exercise" : ["increase your exercise to atleast 6 hours a week", "increase your exercise to atleast 15 hours a week"], "sleep_time": ["increase the amount you sleep to atleast 6 hours a day","increase the amount you sleep to above 8 hours a day"], "bmi": ["", "get your bmi in the healthy range (18.5 - 24 .9)"],"drink": ["", "stop drinking"], "tobacco": ["", "stop using tobacco"], "travel_time" : ["", "reduce the travel time to less than 5 hours","reduce the travel to less than 10 hours"]}
+    return{"smoke" : ["", "stop smoking"], "exercise" : ["increase your exercise to atleast 6 hours a week", "increase your exercise to more than 15 hours a week"], "sleep_time": ["increase the amount you sleep to atleast 6 hours a day","increase the amount you sleep to above 8 hours a day"], "bmi": ["", "get your bmi in the healthy range (18.5 - 24 .9)"],"drink": ["", "stop drinking"], "tobacco": ["", "stop using tobacco"], "travel_time" : ["", "reduce the travel time to less than 5 hours","reduce the travel to less than 10 hours"]}
 
 def processRecommendations(data, maxHealthScore):
     '''
@@ -171,7 +171,7 @@ def processRecommendations(data, maxHealthScore):
     # for key in ["exercise","sleep_time","drink","tobacco","smoke","bmi","travel_time"]:
     #     all_recommendations.append(getRecommendationString([recStrDic[key][data[key][0]]],getRecommendationPointsForKey(data[key], featureWeights[key], maxHealthScore)))
     all_recommendations = [all_recommendations[-1]]+all_recommendations[0:len(all_recommendations)-1]
-    return all_recommendations,round((points/maxHealthScore*data["healthcare_costs"]),2)
+    return all_recommendations,round(((points/maxHealthScore)*data["healthcare_costs"]),2)
     
 def getRecommendationString(resultStrings, points):
   recommendationString = "If you "
@@ -180,8 +180,10 @@ def getRecommendationString(resultStrings, points):
     return ["You are in good shape."]
   for index in (range(resultStringsLength - 1)):
     recommendationString += (resultStrings[index] + ", ")
-  recommendationString += ("and " + resultStrings[resultStringsLength -1] + 
-  " your healthscore will improve by " + str(round(points, 2)) + " points.")
+  if len(resultStrings) == 1:
+    recommendationString += (resultStrings[resultStringsLength -1] + " your healthscore will improve by " + str(round(points, 2)) + " points.")
+  else:
+    recommendationString += ("and " + resultStrings[resultStringsLength -1] + " your healthscore will improve by " + str(round(points, 2)) + " points.")
   return recommendationString
   
     

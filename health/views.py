@@ -48,9 +48,11 @@ class HealthProfileCreate(CreateView):
     model = HealthProfile
     fields = ['age','height','weight','ailments','healthcare_costs','tobacco','smoke','drink','exercise','travel_time', 'sleep_time','job_type']
     success_url = reverse_lazy('health:health_profile')
+    # initial = {'sleep_time':1}
 
     def form_valid(self, form):
         form.instance.user = self.request.user
+        print("+++++++++++++",form.instance.sleep_time)
         return super().form_valid(form)
 
 class HealthProfileUpdate(UpdateView):
